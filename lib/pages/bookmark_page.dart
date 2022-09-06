@@ -16,8 +16,8 @@ class BookmarkPage extends StatelessWidget {
       ),
       body: Consumer(builder: ((context, value, child) {
         return ListView.builder(
-            itemCount: box.read('bookmarks').length,
-            // itemCount: context.watch<BookmarkProvider>().bookMark.length,
+            // itemCount: box.read('bookmarks').length,
+            itemCount: context.watch<BookmarkProvider>().bookMark.length,
             itemBuilder: (context, index) {
               return Card(
                 child: ListTile(
