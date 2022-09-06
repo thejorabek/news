@@ -15,21 +15,24 @@ class BookmarkPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Consumer(builder: ((context, value, child) {
-        return ListView.builder(
-            // itemCount: box.read('bookmarks').length,
-            itemCount: context.watch<BookmarkProvider>().bookMark.length,
-            itemBuilder: (context, index) {
-              return Card(
-                child: ListTile(
-                  leading: CachedNetworkImage(imageUrl: context.watch<BookmarkProvider>().bookMark[index].urlToImage.toString()),
-                  title: Text(
-                    context.watch<BookmarkProvider>().bookMark[index].title.toString(),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
+        return box.hasData('bookmarks')
+            ? ListView.builder(
+                itemCount: box.read('bookmarks').length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      leading: CachedNetworkImage(imageUrl: context.watch<BookmarkProvider>().bookMark[index].urlToImage.toString()),
+                      title: Text(
+                        box.read('bookmarks')[index].title.toString(),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  );
+                })
+            : Center(
+                child: Text('No bookmarks'),
               );
-            });
       })),
     );
   }
