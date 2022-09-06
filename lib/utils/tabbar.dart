@@ -1,9 +1,11 @@
 import 'package:book/models/news_model.dart';
+import 'package:book/provider/bookmark_provider.dart';
 import 'package:book/services/book_service.dart';
 import 'package:book/widgets/latest_news.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../pages/info_page.dart';
 
@@ -113,118 +115,125 @@ class _FirstTabState extends State<FirstTab> {
                     physics: BouncingScrollPhysics(),
                     itemCount: snapshot.data!.articles!.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: height * .03, left: width * .05, right: width * .05),
-                          child: Container(
-                            decoration: BoxDecoration(color: Color.fromARGB(45, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
-                            width: width * .34,
-                            height: height * .2,
-                            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                              Container(
-                                decoration:
-                                    BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))),
-                                width: width * .37,
-                                height: height * .2,
-                                child: ClipRRect(child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),fit: BoxFit.cover,)),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: height * .02),
-                                child: SizedBox(
-                                  width: width * .5,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(left: width * .03),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: width * .5,
-                                              child: Text(snapshot.data!.articles![index].title.toString(),
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                    wordSpacing: 2,
-                                                    fontWeight: FontWeight.w600,
-                                                  )),
-                                            ),
-                                            SizedBox(height: height * .04),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  width: width*.06,
-                                                  height: height*.03,
-                                                  child: ClipOval(
-                                                      child: CachedNetworkImage(
-                                                    imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
-                                                    fit: BoxFit.cover,
-                                                  )),
-                                                ),
-                                                SizedBox(width: width*.02),
-                                                SizedBox(
-                                                  width: width*.35,
-                                                  child: Text(
-                                                    snapshot.data!.articles![index].source!.name.toString(),
-                                                    overflow: TextOverflow.ellipsis,
-                                                    maxLines: 1,
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: height*.01),
-                                      Column(
-                                        children: [
-                                          Row(
+                      return Consumer<BookmarkProvider>(builder: (context, value, child) {
+                        return InkWell(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: height * .03, left: width * .05, right: width * .05),
+                            child: Container(
+                              decoration: BoxDecoration(color: Color.fromARGB(45, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
+                              width: width * .34,
+                              height: height * .2,
+                              child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                Container(
+                                  decoration:
+                                      BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))),
+                                  width: width * .37,
+                                  height: height * .2,
+                                  child: ClipRRect(
+                                      child: CachedNetworkImage(
+                                    imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                                    fit: BoxFit.cover,
+                                  )),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: height * .02),
+                                  child: SizedBox(
+                                    width: width * .5,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: width * .03),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              SizedBox(width: width*.02),
-                                              IconButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      isFav = !isFav;
-                                                    });
-                                                  },
-                                                  icon: Icon(
-                                                    isFav ? Icons.thumb_up_outlined : Icons.thumb_up,
-                                                    size: 18,
-                                                  )),
-                                              Text(
-                                                '155K',
-                                                style: TextStyle(fontSize: 12),
+                                              SizedBox(
+                                                width: width * .5,
+                                                child: Text(snapshot.data!.articles![index].title.toString(),
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                      wordSpacing: 2,
+                                                      fontWeight: FontWeight.w600,
+                                                    )),
                                               ),
-                                              IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(Icons.comment),
-                                                iconSize: 18,
-                                              ),
-                                              Text('155K', style: TextStyle(fontSize: 12)),
+                                              SizedBox(height: height * .04),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    width: width * .06,
+                                                    height: height * .03,
+                                                    child: ClipOval(
+                                                        child: CachedNetworkImage(
+                                                      imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                                                      fit: BoxFit.cover,
+                                                    )),
+                                                  ),
+                                                  SizedBox(width: width * .02),
+                                                  SizedBox(
+                                                    width: width * .35,
+                                                    child: Text(
+                                                      snapshot.data!.articles![index].source!.name.toString(),
+                                                      overflow: TextOverflow.ellipsis,
+                                                      maxLines: 1,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
                                             ],
                                           ),
-                                        ],
-                                      )
-                                    ],
+                                        ),
+                                        SizedBox(height: height * .01),
+                                        Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                SizedBox(width: width * .02),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        isFav = !isFav;
+                                                      });
+                                                    },
+                                                    icon: Icon(
+                                                      isFav ? Icons.thumb_up_outlined : Icons.thumb_up,
+                                                      size: 18,
+                                                    )),
+                                                Text(
+                                                  '155K',
+                                                  style: TextStyle(fontSize: 12),
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {},
+                                                  icon: Icon(Icons.comment),
+                                                  iconSize: 18,
+                                                ),
+                                                Text('155K', style: TextStyle(fontSize: 12)),
+                                              ],
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              )
-                            ]),
+                                )
+                              ]),
+                            ),
                           ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InfoPage(
-                                        listData: snapshot.data!.articles![index],
-                                      )));
-                        },
-                      );
+                          onTap: () {
+                            context.read<BookmarkProvider>().toBookmark();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => InfoPage(
+                                          listData: snapshot.data!.articles![index],
+                                        )));
+                          },
+                        );
+                      });
                     },
                   ),
                 ),

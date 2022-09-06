@@ -1,3 +1,4 @@
+import 'package:book/pages/bookmark_page.dart';
 import 'package:book/pages/settings.dart';
 import 'package:book/provider/notification_provider.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                             value: 1,
                                             groupValue: _value,
                                             onChanged: (v) {
-                                              v=context.read<NotificationProvider>().disabled;
+                                              v = context.read<NotificationProvider>().disabled;
                                             }),
                                         SizedBox(width: 10),
                                         Text('Enable')
@@ -59,7 +60,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                             value: context.watch<NotificationProvider>().disabled,
                                             groupValue: _value,
                                             onChanged: (v) {
-                                              v=context.read<NotificationProvider>().disabled;
+                                              v = context.read<NotificationProvider>().disabled;
                                             }),
                                         SizedBox(width: 10),
                                         Text('Disable')
@@ -83,6 +84,9 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(Icons.bookmark),
             title: Text('Bookmarks'),
             trailing: Icon(Icons.arrow_forward_ios, size: 16),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => BookmarkPage()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),

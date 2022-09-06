@@ -1,5 +1,7 @@
 import 'package:book/models/news_model.dart';
+import 'package:book/provider/bookmark_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class InfoPage extends StatefulWidget {
   InfoPage({Key? key, required this.listData}) : super(key: key);
@@ -13,7 +15,6 @@ class InfoPage extends StatefulWidget {
 class _InfoPageState extends State<InfoPage> {
   bool isFollow = false;
   bool isChecked = false;
-  bool isBookmared = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,24 +36,25 @@ class _InfoPageState extends State<InfoPage> {
             ),
             onTap: () {},
           ),
-          InkWell(
-            splashColor: Colors.white,
-            child: Container(
-              decoration: BoxDecoration(color: Color.fromARGB(120, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
-              width: 45,
-              margin: EdgeInsets.all(7),
-              child: Center(
-                  child: Icon(
-                isBookmared ? Icons.bookmark_border : Icons.bookmark,
-                color: Colors.black,
-              )),
-            ),
-            onTap: () {
-              setState(() {
-                isBookmared = !isBookmared;
-              });
-            },
-          ),
+          Consumer(builder: ((context, value, child) {
+            return InkWell(
+              splashColor: Colors.white,
+              child: Container(
+                decoration: BoxDecoration(color: Color.fromARGB(120, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
+                width: 45,
+                margin: EdgeInsets.all(7),
+                child: Center(
+                    child: Icon(
+                  context.watch<BookmarkProvider>().isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                  color: Colors.black,
+                )),
+              ),
+              onTap: () {
+                context.read<BookmarkProvider>().addToBookmark(widget.listData);
+                context.read<BookmarkProvider>().toBookmark();
+              },
+            );
+          })),
           InkWell(
             splashColor: Colors.white,
             child: Container(
@@ -76,7 +78,6 @@ class _InfoPageState extends State<InfoPage> {
           child: Column(children: [
             Container(
               decoration: BoxDecoration(
-                  color: Colors.red,
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(image: NetworkImage(widget.listData.urlToImage.toString()), fit: BoxFit.cover)),
               width: 400,
@@ -114,7 +115,9 @@ class _InfoPageState extends State<InfoPage> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.red, shape: BoxShape.circle, image: DecorationImage(image: NetworkImage(widget.listData.urlToImage.toString()),fit: BoxFit.cover)),
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(image: NetworkImage(widget.listData.urlToImage.toString()), fit: BoxFit.cover)),
                   width: 50,
                   height: 50,
                 ),
