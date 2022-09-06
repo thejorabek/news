@@ -17,14 +17,13 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(),
-        title: Text('Settings'),
+        title: const Text('Settings'),
         centerTitle: true,
       ),
       body: Column(children: [
         Consumer<ThemeProvider>(builder: ((context, value, child) {
           return SwitchListTile(
-              title: context.watch<ThemeProvider>().isDark ? Text('Dark mode') : Text('Light mode'),
+              title: context.watch<ThemeProvider>().isDark ? const Text('Dark mode',style: TextStyle(fontSize: 20),) : const Text('Light mode',style: TextStyle(fontSize: 20),),
               value: context.watch<ThemeProvider>().isDark,
               onChanged: (value) {
                 context.read<ThemeProvider>().changeTheme();

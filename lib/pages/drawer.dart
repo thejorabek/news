@@ -14,30 +14,35 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-  int _value = 1;
+  final int _value = 1;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Drawer(
       child: Column(
         children: [
-          SizedBox(height: 40),
+          Image.asset('assets/newa.jpg'),
           ListTile(
-            leading: Icon(Icons.newspaper),
-            title: Text('Daily News'),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
+            leading: const Icon(Icons.newspaper),
+            title: const Text('Daily News'),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
           ListTile(
-            leading: Icon(Icons.notifications_rounded),
-            title: Text('Notifications'),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
+            leading: const Icon(Icons.notifications_rounded),
+            title: const Text('Notifications'),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                        title: Text('Notifications'),
+                        title: const Text('Notifications'),
                         content: SizedBox(
-                            height: 100,
-                            width: 70,
+                            height: height * .12,
+                            width: width * .07,
                             child: Consumer<NotificationProvider>(
                               builder: ((context, value, child) {
                                 return Column(
@@ -50,8 +55,8 @@ class _MyDrawerState extends State<MyDrawer> {
                                             onChanged: (v) {
                                               v = context.read<NotificationProvider>().disabled;
                                             }),
-                                        SizedBox(width: 10),
-                                        Text('Enable')
+                                        const SizedBox(width: 10),
+                                        const Text('Enable')
                                       ],
                                     ),
                                     Row(
@@ -62,8 +67,8 @@ class _MyDrawerState extends State<MyDrawer> {
                                             onChanged: (v) {
                                               v = context.read<NotificationProvider>().disabled;
                                             }),
-                                        SizedBox(width: 10),
-                                        Text('Disable')
+                                        SizedBox(width: width * .01),
+                                        const Text('Disable')
                                       ],
                                     ),
                                   ],
@@ -75,45 +80,45 @@ class _MyDrawerState extends State<MyDrawer> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text('Cancel'))
+                              child: const Text('Cancel'))
                         ],
                       ));
             },
           ),
           ListTile(
-            leading: Icon(Icons.bookmark),
-            title: Text('Bookmarks'),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
+            leading: const Icon(Icons.bookmark),
+            title: const Text('Bookmarks'),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => BookmarkPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const BookmarkPage()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Settings()));
             },
           ),
           Container(
-            decoration: BoxDecoration(color: Color.fromARGB(100, 158, 158, 158)),
-            width: 400,
-            height: 1,
+            decoration: const BoxDecoration(color: Color.fromARGB(100, 158, 158, 158)),
+            width: width * .7,
+            height: height * .001,
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(Icons.info),
             title: Text('Info'),
             trailing: Icon(Icons.arrow_forward_ios, size: 16),
           ),
           Container(
-            decoration: BoxDecoration(color: Color.fromARGB(100, 158, 158, 158)),
-            width: 400,
-            height: 1,
+            decoration: const BoxDecoration(color: Color.fromARGB(100, 158, 158, 158)),
+            width: width * .7,
+            height: height * .001,
           ),
           Padding(
-            padding: EdgeInsets.only(top: 250),
-            child: Text('Version 1.1.0'),
+            padding: EdgeInsets.only(top: height * .25),
+            child: const Text('Version 1.1.0'),
           )
         ],
       ),

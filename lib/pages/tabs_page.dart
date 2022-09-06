@@ -1,9 +1,10 @@
-import 'package:book/utils/tabbar.dart';
+import 'package:book/pages/community_page.dart';
+import 'package:book/pages/popular_page.dart';
 import 'package:flutter/material.dart';
 import 'drawer.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -12,11 +13,11 @@ class HomePage extends StatefulWidget {
 bool isSearch = false;
 
 class _HomePageState extends State<HomePage> {
-  
   @override
   Widget build(BuildContext context) {
-    return 
-    DefaultTabController(
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    return DefaultTabController(
       length: 2,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -24,14 +25,15 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           title: isSearch
               ? SizedBox(
-                  height: 40,
+                  height: height*.04,
                   child: TextFormField(
                     autofocus: true,
                     cursorColor: Colors.white,
-                    decoration: InputDecoration(hintText: 'Search News', hintStyle: TextStyle(color: Colors.white, fontStyle: FontStyle.italic), border: InputBorder.none),
+                    decoration: const InputDecoration(
+                        hintText: 'Search News', hintStyle: TextStyle(color: Colors.white, fontStyle: FontStyle.italic), border: InputBorder.none),
                   ),
                 )
-              : Text('News'),
+              : const Text('News'),
           actions: [
             IconButton(
               onPressed: () {
@@ -42,22 +44,22 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(isSearch ? Icons.clear : Icons.search),
               iconSize: 28,
             ),
-            SizedBox(width: 10)
+            SizedBox(width: width*.05)
           ],
           bottom: TabBar(
-            indicator: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color.fromARGB(57, 255, 255, 255)),
+            indicator: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color.fromARGB(57, 255, 255, 255)),
             tabs: [
-              Tab(
+              const Tab(
                 text: 'Popular',
               ),
-              Tab(text: 'Community')
+              const Tab(text: 'Community')
             ],
-            labelStyle: TextStyle(fontSize: 15),
+            labelStyle: const TextStyle(fontSize: 15),
             indicatorWeight: 3,
           ),
         ),
-        drawer: MyDrawer(),
-        body: TabBarView(children: [FirstTab(), SecondTab()]),
+        drawer: const MyDrawer(),
+        body: const TabBarView(children: [FirstTab(), SecondTab()]),
       ),
     );
   }

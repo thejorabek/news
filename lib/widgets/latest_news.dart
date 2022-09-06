@@ -36,6 +36,8 @@ class LatestNews extends StatelessWidget {
           SizedBox(height: 10),
           Text(
             title,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
           ),
           Row(

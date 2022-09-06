@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class InfoPage extends StatefulWidget {
-  InfoPage({Key? key, required this.listData}) : super(key: key);
+  const InfoPage({Key? key, required this.listData}) : super(key: key);
 
   final Article listData;
 
@@ -20,15 +20,15 @@ class _InfoPageState extends State<InfoPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: BackButton(color: Colors.black),
+        leading: const BackButton(color: Colors.black),
         actions: [
           InkWell(
             splashColor: Colors.white,
             child: Container(
-              decoration: BoxDecoration(color: Color.fromARGB(120, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(color: const Color.fromARGB(120, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
               width: 45,
-              margin: EdgeInsets.all(7),
-              child: Center(
+              margin: const EdgeInsets.all(7),
+              child: const Center(
                   child: Icon(
                 Icons.share,
                 color: Colors.black,
@@ -40,9 +40,9 @@ class _InfoPageState extends State<InfoPage> {
             return InkWell(
               splashColor: Colors.white,
               child: Container(
-                decoration: BoxDecoration(color: Color.fromARGB(120, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: const Color.fromARGB(120, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
                 width: 45,
-                margin: EdgeInsets.all(7),
+                margin: const EdgeInsets.all(7),
                 child: Center(
                     child: Icon(
                   context.watch<BookmarkProvider>().isBookmarked ? Icons.bookmark : Icons.bookmark_border,
@@ -58,10 +58,10 @@ class _InfoPageState extends State<InfoPage> {
           InkWell(
             splashColor: Colors.white,
             child: Container(
-              decoration: BoxDecoration(color: Color.fromARGB(120, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(color: const Color.fromARGB(120, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
               width: 45,
-              margin: EdgeInsets.all(7),
-              child: Center(
+              margin: const EdgeInsets.all(7),
+              child: const Center(
                   child: Icon(
                 Icons.more_vert,
                 color: Colors.black,
@@ -69,30 +69,31 @@ class _InfoPageState extends State<InfoPage> {
             ),
             onTap: () {},
           ),
-          SizedBox(width: 20)
+          const SizedBox(width: 20)
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(children: [
             Container(
               decoration: BoxDecoration(
+                  color: const Color.fromARGB(138, 204, 204, 204),
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(image: NetworkImage(widget.listData.urlToImage.toString()), fit: BoxFit.cover)),
               width: 400,
               height: 250,
-              margin: EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 20),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               widget.listData.title.toString(),
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
+              children: const [
                 Icon(
                   Icons.remove_red_eye,
                   size: 18,
@@ -110,32 +111,28 @@ class _InfoPageState extends State<InfoPage> {
                 Text('170.5K')
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: const Color.fromARGB(138, 204, 204, 204),
                       shape: BoxShape.circle,
                       image: DecorationImage(image: NetworkImage(widget.listData.urlToImage.toString()), fit: BoxFit.cover)),
                   width: 50,
                   height: 50,
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(widget.listData.source!.name.toString()),
-                    SizedBox(height: 10),
-                    Text(widget.listData.publishedAt!.year.toString() +
-                        '-' +
-                        widget.listData.publishedAt!.month.toString() +
-                        '-' +
-                        widget.listData.publishedAt!.day.toString()),
+                    const SizedBox(height: 10),
+                    Text('${widget.listData.publishedAt!.year}-${widget.listData.publishedAt!.month}-${widget.listData.publishedAt!.day}'),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 ElevatedButton(
                     style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),
                     onPressed: () {
@@ -145,19 +142,19 @@ class _InfoPageState extends State<InfoPage> {
                       });
                     },
                     child: Row(
-                      children: [Icon(isChecked ? Icons.check : Icons.add), SizedBox(width: 5), Text(isFollow ? 'Following' : 'Follow')],
+                      children: [Icon(isChecked ? Icons.check : Icons.add), const SizedBox(width: 5), Text(isFollow ? 'Following' : 'Follow')],
                     ))
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               widget.listData.content.toString(),
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: const TextStyle(fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               widget.listData.description.toString(),
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: const TextStyle(fontWeight: FontWeight.w500),
             )
           ]),
         ),

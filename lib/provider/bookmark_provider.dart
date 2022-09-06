@@ -3,7 +3,7 @@ import 'package:book/models/news_model.dart';
 import 'package:flutter/widgets.dart';
 
 class BookmarkProvider extends ChangeNotifier {
-  List _bookMark = [];
+  final List _bookMark = [];
   bool _isBookmarked = true;
 
   bool get isBookmarked => _isBookmarked;

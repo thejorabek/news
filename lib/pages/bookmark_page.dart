@@ -1,4 +1,5 @@
 import 'package:book/main.dart';
+import 'package:book/pages/info_page.dart';
 import 'package:book/provider/bookmark_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class BookmarkPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bookmarks'),
+        title: const Text('Bookmarks'),
         centerTitle: true,
       ),
       body: Consumer(builder: ((context, value, child) {
@@ -27,11 +28,18 @@ class BookmarkPage extends StatelessWidget {
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
+                      onTap: () {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => InfoPage(listData: context.watch<BookmarkProvider>().bookMark[index])));
+                      },
                     ),
                   );
                 })
-            : Center(
-                child: Text('No bookmarks'),
+            : const Center(
+                child: Text(
+                  'No bookmarks',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                ),
               );
       })),
     );
