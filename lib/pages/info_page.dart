@@ -1,8 +1,5 @@
 import 'package:book/models/news_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_share/flutter_share.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:share/share.dart';
 
 class InfoPage extends StatefulWidget {
   InfoPage({Key? key, required this.listData}) : super(key: key);
