@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 class BookmarkProvider extends ChangeNotifier {
   final List _bookMark = [];
-  bool _isBookmarked = true;
+  bool _isBookmarked = false;
 
   bool get isBookmarked => _isBookmarked;
 

@@ -4,6 +4,7 @@ import 'package:book/services/book_service.dart';
 import 'package:book/utils/shimmers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:provider/provider.dart';
 import 'info_page.dart';
@@ -57,11 +58,11 @@ class _FirstTabState extends State<FirstTab> {
                             child: Container(
                               decoration: BoxDecoration(color: const Color.fromARGB(45, 158, 158, 158), borderRadius: BorderRadius.circular(10)),
                               width: width * .34,
-                              height: height * .2,
+                              height: height * .23,
                               child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                                 Container(
-                                  decoration:
-                                      const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))),
+                                  decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))),
                                   width: width * .37,
                                   height: height * .2,
                                   child: ClipRRect(
@@ -149,6 +150,13 @@ class _FirstTabState extends State<FirstTab> {
                                                 const Text('155K', style: TextStyle(fontSize: 12)),
                                               ],
                                             ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                              Text(DateFormat('dd-MMM-yy').format(snapshot.data!.articles![index].publishedAt!)),
+                                              Text(DateFormat('hh:MM a').format(snapshot.data!.articles![index].publishedAt!))
+                                              ],
+                                            )
                                           ],
                                         )
                                       ],
