@@ -13,4 +13,6 @@ Change app theme by using Provider State Management
 
 ![Screenshot_1662446441](https://user-images.githubusercontent.com/94858749/188572505-b9e9635b-f1ca-4bdc-82e0-7312a7cc309c.png)
 
-![Screenshot_1662446459](https://user-images.githubusercontent.com/94858749/188572552-38e7a30e-d8ef-45e0-a5db-00f6c257e05d.png)
+![Screenshot_1662446479](https://user-images.githubusercontent.com/94858749/188572742-dfbd5477-f72f-4562-8d4c-1bc2ded1f797.png)
+
+![Screenshot_1662446415](https://user-images.githubusercontent.com/94858749/188572818-8f462772-f929-4b9d-9a06-6af3ae916086.png)
